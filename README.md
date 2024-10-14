@@ -1,7 +1,13 @@
 # File Handler fork of [Resource Consumer](https://github.com/kubernetes/kubernetes/tree/master/test/images/resource-consumer)
 
-- /handler?cmd=<anyapp>/<anycmd>/type/ConsumeCPU/...
-- /handler?cmd=<anyapp>/<anycmd>/type/ConsumeMem/...
+- `/handler?cmd=<anyapp>/<anycmd>/type/ConsumeCPU/block/1/..`
+- `/handler?cmd=<anyapp>/<anycmd>/type/ConsumeMem/..`
+
+for example
+
+```bash
+curl -X POST 172.17.0.4:9100/handler?cmd=a/b/type/ConsumeCPU/millicores/800/durationSec/600/block/1
+```
 
 ## Overview
 Resource Consumer is a tool which allows to generate cpu/memory utilization in a container.

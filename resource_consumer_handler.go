@@ -115,7 +115,11 @@ func (handler *ResourceConsumerHandler) handleConsumeCPU(w http.ResponseWriter, 
 		return
 	}
 
-	go ConsumeCPU(millicores, durationSec)
+	if query.Get("block") != "" {
+		ConsumeCPU(millicores, durationSec)
+	} else {
+		go ConsumeCPU(millicores, durationSec)
+	}
 	fmt.Fprintln(w, common.ConsumeCPUAddress[1:])
 	fmt.Fprintln(w, millicores, common.MillicoresQuery)
 	fmt.Fprintln(w, durationSec, common.DurationSecQuery)
@@ -138,7 +142,12 @@ func (handler *ResourceConsumerHandler) handleConsumeMem(w http.ResponseWriter, 
 		return
 	}
 
-	go ConsumeMem(megabytes, durationSec)
+	if query.Get("block") != "" {
+		ConsumeMem(megabytes, durationSec)
+	} else {
+		go ConsumeMem(megabytes, durationSec)
+	}
+
 	fmt.Fprintln(w, common.ConsumeMemAddress[1:])
 	fmt.Fprintln(w, megabytes, common.MegabytesQuery)
 	fmt.Fprintln(w, durationSec, common.DurationSecQuery)
